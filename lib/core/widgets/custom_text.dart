@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomText extends StatelessWidget {
-  const CustomText(
-      {super.key,
-      required this.title,
-      this.style,
-      this.maxLines,
-      this.overflow});
+  const CustomText({
+    super.key,
+    required this.title,
+    this.style,
+    this.maxLines,
+    this.overflow,
+  });
   final String title;
   final TextStyle? style;
   final int? maxLines;
@@ -19,9 +20,7 @@ class CustomText extends StatelessWidget {
       style: style,
       maxLines: maxLines ?? 1,
       overflow: overflow ?? TextOverflow.ellipsis,
-      textScaler: TextScaler.linear(1),
+      textScaler: const TextScaler.linear(1),
     );
   }
 }
-
-
