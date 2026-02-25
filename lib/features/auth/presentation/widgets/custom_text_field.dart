@@ -30,9 +30,9 @@ class CustomTextField extends StatelessWidget {
       keyboardType: keyboardType ?? TextInputType.text,
       obscureText: isPassword,
       obscuringCharacter: "*",
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      style: AppTextStyle.font14BlackW600.copyWith(fontSize: 16.sp),
       decoration: InputDecoration(
-        // isDense: true,
-        // contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
           borderSide: const BorderSide(color: AppColors.kSecondaryColorGrey),
