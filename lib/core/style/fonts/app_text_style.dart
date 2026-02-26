@@ -8,6 +8,11 @@ class AppTextStyle {
     fontSize: 24.sp,
     fontWeight: FontWeight.w600,
   );
+  static TextStyle font18White600 = TextStyle(
+    color: AppColors.kScaffoldBackgroundColor,
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w600,
+  );
   static TextStyle font16greyW400 = TextStyle(
     color: AppColors.kSecondaryColorGrey,
     fontSize: 16.sp,
@@ -17,6 +22,17 @@ class AppTextStyle {
     color: AppColors.kDarkBlue,
     fontSize: 14.sp,
     fontWeight: FontWeight.w600,
+  );
+  static TextStyle font14BlueW500Underline = TextStyle(
+    color: AppColors.kPrimaryColorBlue,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w500,
+    decoration: TextDecoration.underline,
+  );
+  static TextStyle font14BlueWBold = TextStyle(
+    color: AppColors.kPrimaryColorBlue,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.bold,
   );
 
   // static TextStyle font11Black600 = TextStyle(
