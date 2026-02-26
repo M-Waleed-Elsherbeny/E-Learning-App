@@ -1,6 +1,8 @@
 import 'package:e_learning_app/core/assets/app_assets.dart';
+import 'package:e_learning_app/core/helper/custom_snack_bar.dart';
 import 'package:e_learning_app/core/helper/password_and_email_validations.dart';
 import 'package:e_learning_app/core/helper/spacer.dart';
+import 'package:e_learning_app/core/routes/app_route_path.dart';
 import 'package:e_learning_app/core/style/colors/app_colors.dart';
 import 'package:e_learning_app/core/style/fonts/app_text_style.dart';
 import 'package:e_learning_app/core/widgets/custom_text.dart';
@@ -52,18 +54,16 @@ class _LoginViewState extends State<LoginView> {
           BlocConsumer<AuthCubit, AuthState>(
             listener: (context, state) {
               if (state is LoginErrorState) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(state.errorMessage),
-                    backgroundColor: Colors.red,
-                  ),
-                );
+                customSnackBar(context, state.errorMessage);
               } else if (state is LoginSuccessState) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("Login successful"),
-                    backgroundColor: Colors.green,
-                  ),
+                customSnackBar(
+                  context,
+                  "Login Successfully",
+                  backgroundColor: Colors.green,
+                );
+                Navigator.pushReplacementNamed(
+                  context,
+                  AppRoutePath.homeScreen,
                 );
               }
             },
@@ -103,11 +103,11 @@ class _LoginViewState extends State<LoginView> {
                                     if (!PasswordAndEmailValidations.isValidEmail(
                                       email: value,
                                     )) {
-                                      return "Please enter a valid email";
+                                      return "Please enter a valid Email";
                                     }
                                     return null;
                                   },
-                                  labelText: "Enter your email",
+                                  labelText: "Enter your Email",
                                   prefixIcon: const Icon(
                                     Icons.email_outlined,
                                     color: AppColors.kLightBlue,
@@ -131,7 +131,7 @@ class _LoginViewState extends State<LoginView> {
                                     }
                                     return null;
                                   },
-                                  labelText: "Enter your password",
+                                  labelText: "Enter your Password",
                                   prefixIcon: const Icon(
                                     Icons.lock_outline,
                                     color: AppColors.kLightBlue,
@@ -164,8 +164,9 @@ class _LoginViewState extends State<LoginView> {
                                       context
                                           .read<AuthCubit>()
                                           .signInWithEmailAndPassword(
-                                            email: emailController.text,
-                                            password: passwordController.text,
+                                            email: emailController.text.trim(),
+                                            password: passwordController.text
+                                                .trim(),
                                           );
                                     }
                                   },
