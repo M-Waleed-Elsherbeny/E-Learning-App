@@ -1,3 +1,4 @@
+import 'package:e_learning_app/core/routes/app_route_path.dart';
 import 'package:e_learning_app/core/style/fonts/app_text_style.dart';
 import 'package:e_learning_app/core/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +14,22 @@ class HaveAccountOrNot extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CustomText(
-          title: isLogin ? "Don't have an account? ": "Already have an account? ",
+          title: isLogin
+              ? "Don't have an account? "
+              : "Already have an account? ",
           style: AppTextStyle.font16greyW400.copyWith(fontSize: 14.sp),
         ),
-        CustomText(title: isLogin ? "Sign up": "login", style: AppTextStyle.font14BlueWBold),
+        GestureDetector(
+          onTap: () {
+            isLogin
+                ? Navigator.pushNamed(context, AppRoutePath.signUpScreen)
+                : Navigator.pop(context);
+          },
+          child: CustomText(
+            title: isLogin ? "Sign Up" : "Login",
+            style: AppTextStyle.font14BlueWBold,
+          ),
+        ),
       ],
     );
   }
