@@ -46,11 +46,11 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.kLightBlue,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const TopLogo(title: "Login"),
-          heightSpace(40),
           BlocConsumer<AuthCubit, AuthState>(
             listener: (context, state) {
               if (state is LoginErrorState) {
@@ -81,8 +81,19 @@ class _LoginViewState extends State<LoginView> {
                       ),
                     )
                   : Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 36.w),
+                      child: Container(
+                        padding: EdgeInsets.only(
+                          left: 20.w,
+                          right: 20.w,
+                          top: 20.h,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.kScaffoldBackgroundColor,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20.r),
+                            topRight: Radius.circular(20.r),
+                          ),
+                        ),
                         child: SingleChildScrollView(
                           child: Form(
                             key: formKey,
