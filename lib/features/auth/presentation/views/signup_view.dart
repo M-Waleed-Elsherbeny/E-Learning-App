@@ -219,8 +219,8 @@ class _SignupViewState extends State<SignupView> {
                                           .read<AuthCubit>()
                                           .signUpWithEmailAndPassword(
                                             email: emailController.text.trim(),
-                                            password: passwordController.text
-                                                .trim(),
+                                            password: passwordController.text.trim(),
+                                            name: nameController.text.trim(),
                                           );
                                     }
                                   },

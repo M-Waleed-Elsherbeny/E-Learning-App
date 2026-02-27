@@ -2,7 +2,8 @@ import 'package:e_learning_app/core/routes/app_route_path.dart';
 import 'package:e_learning_app/features/auth/data/cubit/auth_cubit.dart';
 import 'package:e_learning_app/features/auth/presentation/views/login_view.dart';
 import 'package:e_learning_app/features/auth/presentation/views/signup_view.dart';
-import 'package:e_learning_app/features/home/presentation/view/home_view.dart';
+import 'package:e_learning_app/features/navigation/data/cubit/navigation_cubit.dart';
+import 'package:e_learning_app/features/navigation/presentation/view/layout_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,10 +26,15 @@ class AppRouteConfig {
           ),
         );
 
-      case AppRoutePath.homeScreen:
+      case AppRoutePath.layoutBottomNavigationBar:
         return MaterialPageRoute(
-          builder: (_) => const HomeView(),
+          builder: (_) => BlocProvider<NavigationCubit>(
+            create: (context) => NavigationCubit(),
+            child: const LayoutBottomNavigationBar(),
+          ),
         );
+
+      
 
       default:
         return MaterialPageRoute(

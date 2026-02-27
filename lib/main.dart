@@ -37,13 +37,14 @@ class MyApp extends StatelessWidget {
           title: 'E-Learning App',
           // You can use the library anywhere in the app even in theme
           theme: ThemeData(
+            splashColor: Colors.transparent,
             scaffoldBackgroundColor: AppColors.kScaffoldBackgroundColor,
             textTheme: Typography.englishLike2018.apply(
               fontFamily: GoogleFonts.tenorSans().fontFamily,
               fontSizeFactor: 1.sp,
             ),
           ),
-          initialRoute: AppRoutePath.loginScreen,
+          initialRoute: AppRoutePath.layoutBottomNavigationBar,
           onGenerateRoute: AppRouteConfig().onGenerateRoute,
         );
       },
