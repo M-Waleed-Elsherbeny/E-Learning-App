@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
               fontSizeFactor: 1.sp,
             ),
           ),
-          initialRoute: AppRoutePath.layoutBottomNavigationBar,
+          initialRoute: AppRoutePath.loginScreen,
           onGenerateRoute: AppRouteConfig().onGenerateRoute,
         );
       },

@@ -25,7 +25,7 @@ class LayoutBottomNavigationBar extends StatelessWidget {
                 const BoxShadow(
                   color: AppColors.kPrimaryColorBlue,
                   blurRadius: 10,
-                  offset: Offset(0, -4),
+                  offset: Offset(0, 4),
                 ),
               ],
             ),
@@ -38,19 +38,25 @@ class LayoutBottomNavigationBar extends StatelessWidget {
               showUnselectedLabels: false,
               type: BottomNavigationBarType.fixed,
               elevation: 0.0,
-              selectedItemColor: AppColors.kScaffoldBackgroundColor,
-              unselectedItemColor: AppColors.kSecondaryColorGrey,
+              selectedItemColor: AppColors.kDarkBlue,
+              unselectedItemColor: AppColors.kScaffoldBackgroundColor,
               items: <BottomNavigationBarItem>[
-                const BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
+                BottomNavigationBarItem(
+                  icon: index == 0
+                      ? const Icon(Icons.home_filled)
+                      : const Icon(Icons.home_outlined),
                   label: 'Home',
                 ),
-                const BottomNavigationBarItem(
-                  icon: Icon(Icons.school),
+                BottomNavigationBarItem(
+                  icon: index == 1
+                      ? const Icon(Icons.school)
+                      : const Icon(Icons.school_outlined),
                   label: 'Courses',
                 ),
-                const BottomNavigationBarItem(
-                  icon: Icon(Icons.person_2_rounded),
+                BottomNavigationBarItem(
+                  icon: index == 2
+                      ? const Icon(Icons.person_2_rounded)
+                      : const Icon(Icons.person_2_outlined),
                   label: 'Profile',
                 ),
               ],

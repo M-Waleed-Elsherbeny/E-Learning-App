@@ -15,13 +15,7 @@ class TopLogo extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 200.h,
-      decoration: BoxDecoration(
-        color: AppColors.kLightBlue,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(50.r),
-          bottomRight: Radius.circular(50.r),
-        ),
-      ),
+      decoration: const BoxDecoration(color: AppColors.kLightBlue),
       child: Column(
         children: [
           SvgPicture.asset(
