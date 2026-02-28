@@ -13,6 +13,11 @@ class AppTextStyle {
     fontSize: 18.sp,
     fontWeight: FontWeight.w600,
   );
+  static TextStyle font16WhiteNormal = TextStyle(
+    color: AppColors.kScaffoldBackgroundColor,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.normal,
+  );
   static TextStyle font16greyW400 = TextStyle(
     color: AppColors.kSecondaryColorGrey,
     fontSize: 16.sp,
@@ -22,6 +27,11 @@ class AppTextStyle {
     color: AppColors.kDarkBlue,
     fontSize: 14.sp,
     fontWeight: FontWeight.w600,
+  );
+  static TextStyle font16BlackWBold = TextStyle(
+    color: AppColors.kDarkBlue,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.bold,
   );
   static TextStyle font14BlueW500Underline = TextStyle(
     color: AppColors.kPrimaryColorBlue,
