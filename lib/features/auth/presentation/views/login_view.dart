@@ -183,6 +183,16 @@ class _LoginViewState extends State<LoginView> {
                                   },
                                   text: "Login",
                                 ),
+                                heightSpace(20),
+                                MyCustomButton(
+                                  onPressed: () {
+                                    Navigator.pushReplacementNamed(
+                                      context,
+                                      AppRoutePath.layoutBottomNavigationBar,
+                                    );
+                                  },
+                                  text: "Continue as Guest",
+                                ),
                                 heightSpace(18),
                                 const LoginWithSocialMedia(),
                                 heightSpace(50),
