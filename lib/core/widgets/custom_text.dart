@@ -1,3 +1,4 @@
+import 'package:e_learning_app/core/style/fonts/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class CustomText extends StatelessWidget {
@@ -17,7 +18,7 @@ class CustomText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: style,
+      style: style ?? AppTextStyle.font16BlackWBold,
       maxLines: maxLines ?? 1,
       overflow: overflow ?? TextOverflow.ellipsis,
       textScaler: const TextScaler.linear(1),

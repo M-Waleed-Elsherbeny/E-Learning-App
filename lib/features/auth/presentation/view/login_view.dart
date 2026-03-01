@@ -62,7 +62,7 @@ class _LoginViewState extends State<LoginView> {
                 );
                 Navigator.pushReplacementNamed(
                   context,
-                  AppRoutePath.homeScreen,
+                  AppRoutePath.layoutBottomNavigationBar,
                 );
               }
             },

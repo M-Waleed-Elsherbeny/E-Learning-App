@@ -11,9 +11,10 @@ class CoursesCardDetails extends StatelessWidget {
     super.key,
     required this.title,
     required this.price,
-    required this.imageUrl,
+    required this.imageUrl, this.onPressed,
   });
   final String title, price, imageUrl;
+  final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,7 +41,7 @@ class CoursesCardDetails extends StatelessWidget {
               imageUrl,
               height: 120.h,
               width: double.infinity,
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
           ),
           heightSpace(10),
@@ -58,8 +59,9 @@ class CoursesCardDetails extends StatelessWidget {
                 heightSpace(10),
                 MyCustomButton(
                   text: "Show Details",
-                  onPressed: () {},
+                  onPressed: onPressed,
                   height: 40.h,
+                  style: AppTextStyle.font12WhiteBold,
                 ),
               ],
             ),
