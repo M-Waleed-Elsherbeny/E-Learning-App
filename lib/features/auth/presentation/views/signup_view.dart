@@ -1,4 +1,4 @@
-import 'package:e_learning_app/core/assets/app_assets.dart';
+import 'package:e_learning_app/core/helper/custom_loading.dart';
 import 'package:e_learning_app/core/helper/custom_snack_bar.dart';
 import 'package:e_learning_app/core/helper/password_and_email_validations.dart';
 import 'package:e_learning_app/core/helper/spacer.dart';
@@ -15,7 +15,6 @@ import 'package:e_learning_app/features/auth/presentation/widgets/top_logo.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
 
 class SignupView extends StatefulWidget {
   const SignupView({super.key});
@@ -73,17 +72,7 @@ class _SignupViewState extends State<SignupView> {
             },
             builder: (context, state) {
               return state is SignUpLoadingState
-                  ? Expanded(
-                      child: Center(
-                        child: Lottie.asset(
-                          AppAssets.loading,
-                          width: 150.w,
-                          height: 150.h,
-                          alignment: Alignment.center,
-                          filterQuality: FilterQuality.high,
-                        ),
-                      ),
-                    )
+                  ? customLoading()
                   : Expanded(
                       child: Container(
                         padding: EdgeInsets.only(
