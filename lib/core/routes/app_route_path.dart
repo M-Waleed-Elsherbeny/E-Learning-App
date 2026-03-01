@@ -3,5 +3,6 @@ class AppRoutePath {
   static const String signUpScreen = '/signUpScreen';
   static const String homeScreen = '/homeScreen';
   static const String layoutBottomNavigationBar = '/layoutBottomNavigationBar';
+  static const String courseDetails = '/courseDetails';
 
 }

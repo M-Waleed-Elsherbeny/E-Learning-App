@@ -25,26 +25,32 @@ class HomeView extends StatelessWidget {
         },
         builder: (context, state) {
           return Scaffold(
-            body: Column(
-              children: [
-                const TopHeaderWithSearch(userName: "Mohammed Waleed"),
-                state is GetCoursesLoadingState
-                    ? customLoading()
-                    : state is GetCoursesSuccessState &&
-                          state.courses.isNotEmpty
-                    ? CoursesGridView(
-                        itemCount: state.courses.length,
-                        courses: state.courses,
-                      )
-                    : Expanded(
-                        child: Center(
-                          child: CustomText(
-                            title: "No courses available",
-                            style: AppTextStyle.font16BlackWBold,
+            body: RefreshIndicator(
+              onRefresh: () => context.read<HomeCubit>().fetchCourses(),
+              backgroundColor: Colors.transparent,
+              color: Colors.transparent,
+              elevation: 0.0,
+              child: Column(
+                children: [
+                  const TopHeaderWithSearch(userName: "Mohammed Waleed"),
+                  state is GetCoursesLoadingState
+                      ? customLoading()
+                      : state is GetCoursesSuccessState &&
+                            state.courses.isNotEmpty
+                      ? CoursesGridView(
+                          itemCount: state.courses.length,
+                          courses: state.courses,
+                        )
+                      : Expanded(
+                          child: Center(
+                            child: CustomText(
+                              title: "No courses available",
+                              style: AppTextStyle.font16BlackWBold,
+                            ),
                           ),
                         ),
-                      ),
-              ],
+                ],
+              ),
             ),
           );
         },

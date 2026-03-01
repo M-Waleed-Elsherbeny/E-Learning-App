@@ -43,6 +43,9 @@ class MyApp extends StatelessWidget {
               fontFamily: GoogleFonts.tenorSans().fontFamily,
               fontSizeFactor: 1.sp,
             ),
+            appBarTheme: const AppBarTheme(
+              backgroundColor: AppColors.kScaffoldBackgroundColor,
+            ),
           ),
           initialRoute: AppRoutePath.loginScreen,
           onGenerateRoute: AppRouteConfig().onGenerateRoute,

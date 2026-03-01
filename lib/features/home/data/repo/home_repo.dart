@@ -18,4 +18,11 @@ class HomeRepo {
       return left(e.toString());
     }
   }
+
+  // Future<Either<String, void>> getUserName() async {
+  //   try {
+  //     final String userId = supabase.auth.currentUser!.id;
+  //     final String userName = await supabase.from("users");
+  //   } catch (e) {}
+  // }
 }
