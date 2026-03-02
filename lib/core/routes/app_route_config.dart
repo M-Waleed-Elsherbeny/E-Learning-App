@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:e_learning_app/core/routes/app_route_path.dart';
 import 'package:e_learning_app/features/auth/data/cubit/auth_cubit.dart';
 import 'package:e_learning_app/features/auth/presentation/view/login_view.dart';
@@ -10,6 +12,7 @@ import 'package:e_learning_app/features/navigation/data/cubit/navigation_cubit.d
 import 'package:e_learning_app/features/navigation/presentation/view/layout_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AppRouteConfig {
   Route onGenerateRoute(RouteSettings settings) {
@@ -42,9 +45,16 @@ class AppRouteConfig {
         return MaterialPageRoute(
           builder: (context) {
             final CourseModel courseModel = settings.arguments as CourseModel;
+            final String? userId = Supabase.instance.client.auth.currentUser?.id;
+            log(userId ?? "No User");
             return BlocProvider(
-              create: (context) => EnrollCourseCubit(CourseDetailsRepo()),
-              child: CourseDetailsView(courseModel: courseModel),
+              create: (context) =>
+                  EnrollCourseCubit(CourseDetailsRepo())
+                    ..checkEnrollment(courseId: courseModel.id, userId: userId),
+              child: CourseDetailsView(
+                courseModel: courseModel,
+                userId: userId,
+              ),
             );
           },
         );

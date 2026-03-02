@@ -1,4 +1,3 @@
-import 'package:e_learning_app/core/helper/custom_loading.dart';
 import 'package:e_learning_app/core/helper/custom_snack_bar.dart';
 import 'package:e_learning_app/core/helper/password_and_email_validations.dart';
 import 'package:e_learning_app/core/helper/spacer.dart';
@@ -71,149 +70,149 @@ class _SignupViewState extends State<SignupView> {
               }
             },
             builder: (context, state) {
-              return state is SignUpLoadingState
-                  ? customLoading()
-                  : Expanded(
-                      child: Container(
-                        padding: EdgeInsets.only(
-                          left: 20.w,
-                          right: 20.w,
-                          top: 20.h,
-                        ),
-                        decoration: BoxDecoration(
-                          color: AppColors.kScaffoldBackgroundColor,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20.r),
-                            topRight: Radius.circular(20.r),
+              return Expanded(
+                child: Container(
+                  padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h),
+                  decoration: BoxDecoration(
+                    color: AppColors.kScaffoldBackgroundColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.r),
+                      topRight: Radius.circular(20.r),
+                    ),
+                  ),
+                  child: SingleChildScrollView(
+                    child: Form(
+                      key: formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            title: "Name",
+                            style: AppTextStyle.font14BlackW600,
                           ),
-                        ),
-                        child: SingleChildScrollView(
-                          child: Form(
-                            key: formKey,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                CustomText(
-                                  title: "Name",
-                                  style: AppTextStyle.font14BlackW600,
-                                ),
-                                heightSpace(8),
-                                CustomTextField(
-                                  controller: nameController,
-                                  labelText: "Enter your name",
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Name can't be empty";
-                                    }
-                                    return null;
-                                  },
-                                  prefixIcon: const Icon(
-                                    Icons.person_outline,
-                                    color: AppColors.kLightBlue,
+                          heightSpace(8),
+                          CustomTextField(
+                            controller: nameController,
+                            labelText: "Enter your name",
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Name can't be empty";
+                              }
+                              return null;
+                            },
+                            prefixIcon: const Icon(
+                              Icons.person_outline,
+                              color: AppColors.kLightBlue,
+                            ),
+                          ),
+                          heightSpace(20),
+                          CustomText(
+                            title: "Email",
+                            style: AppTextStyle.font14BlackW600,
+                          ),
+                          heightSpace(8),
+                          CustomTextField(
+                            controller: emailController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Email can't be empty";
+                              }
+                              if (!PasswordAndEmailValidations.isValidEmail(
+                                email: value,
+                              )) {
+                                return "Please enter a valid Email";
+                              }
+                              return null;
+                            },
+                            labelText: "Enter your Email",
+                            prefixIcon: const Icon(
+                              Icons.email_outlined,
+                              color: AppColors.kLightBlue,
+                            ),
+                          ),
+                          heightSpace(20),
+                          CustomText(
+                            title: "Password",
+                            style: AppTextStyle.font14BlackW600,
+                          ),
+                          heightSpace(8),
+                          CustomTextField(
+                            controller: passwordController,
+                            isPassword: !isPassword,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Password can't be empty";
+                              }
+                              if (value.length < 8) {
+                                return "Password must be at least 8 characters";
+                              }
+                              return null;
+                            },
+                            labelText: "Enter your Password",
+                            prefixIcon: const Icon(
+                              Icons.lock_outline,
+                              color: AppColors.kLightBlue,
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                isPassword
+                                    ? Icons.visibility_outlined
+                                    : Icons.visibility_off_outlined,
+                                color: AppColors.kLightBlue,
+                              ),
+                              onPressed: () {
+                                isPassword = !isPassword;
+                                setState(() {});
+                              },
+                            ),
+                          ),
+                          heightSpace(20),
+                          CustomText(
+                            title: "Confirm Password",
+                            style: AppTextStyle.font14BlackW600,
+                          ),
+                          heightSpace(8),
+                          CustomTextField(
+                            controller: confirmPasswordController,
+                            isPassword: !isConfirmPassword,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Password can't be empty";
+                              }
+                              if (!PasswordAndEmailValidations.hasMatchedPassword(
+                                passwordController.text,
+                                confirmPasswordController.text,
+                              )) {
+                                return "Passwords do not match";
+                              }
+                              return null;
+                            },
+                            labelText: "Confirm your Password",
+                            prefixIcon: const Icon(
+                              Icons.lock_outline,
+                              color: AppColors.kLightBlue,
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                isConfirmPassword
+                                    ? Icons.visibility_outlined
+                                    : Icons.visibility_off_outlined,
+                                color: AppColors.kLightBlue,
+                              ),
+                              onPressed: () {
+                                isConfirmPassword = !isConfirmPassword;
+                                setState(() {});
+                              },
+                            ),
+                          ),
+                          heightSpace(30),
+                          state is SignUpLoadingState
+                              ? const Center(
+                                  child: CircularProgressIndicator(
+                                    color: AppColors.kPrimaryColorBlue,
                                   ),
-                                ),
-                                heightSpace(20),
-                                CustomText(
-                                  title: "Email",
-                                  style: AppTextStyle.font14BlackW600,
-                                ),
-                                heightSpace(8),
-                                CustomTextField(
-                                  controller: emailController,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Email can't be empty";
-                                    }
-                                    if (!PasswordAndEmailValidations.isValidEmail(
-                                      email: value,
-                                    )) {
-                                      return "Please enter a valid Email";
-                                    }
-                                    return null;
-                                  },
-                                  labelText: "Enter your Email",
-                                  prefixIcon: const Icon(
-                                    Icons.email_outlined,
-                                    color: AppColors.kLightBlue,
-                                  ),
-                                ),
-                                heightSpace(20),
-                                CustomText(
-                                  title: "Password",
-                                  style: AppTextStyle.font14BlackW600,
-                                ),
-                                heightSpace(8),
-                                CustomTextField(
-                                  controller: passwordController,
-                                  isPassword: !isPassword,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Password can't be empty";
-                                    }
-                                    if (value.length < 8) {
-                                      return "Password must be at least 8 characters";
-                                    }
-                                    return null;
-                                  },
-                                  labelText: "Enter your Password",
-                                  prefixIcon: const Icon(
-                                    Icons.lock_outline,
-                                    color: AppColors.kLightBlue,
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      isPassword
-                                          ? Icons.visibility_outlined
-                                          : Icons.visibility_off_outlined,
-                                      color: AppColors.kLightBlue,
-                                    ),
-                                    onPressed: () {
-                                      isPassword = !isPassword;
-                                      setState(() {});
-                                    },
-                                  ),
-                                ),
-                                heightSpace(20),
-                                CustomText(
-                                  title: "Confirm Password",
-                                  style: AppTextStyle.font14BlackW600,
-                                ),
-                                heightSpace(8),
-                                CustomTextField(
-                                  controller: confirmPasswordController,
-                                  isPassword: !isConfirmPassword,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Password can't be empty";
-                                    }
-                                    if (!PasswordAndEmailValidations.hasMatchedPassword(
-                                      passwordController.text,
-                                      confirmPasswordController.text,
-                                    )) {
-                                      return "Passwords do not match";
-                                    }
-                                    return null;
-                                  },
-                                  labelText: "Confirm your Password",
-                                  prefixIcon: const Icon(
-                                    Icons.lock_outline,
-                                    color: AppColors.kLightBlue,
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      isConfirmPassword
-                                          ? Icons.visibility_outlined
-                                          : Icons.visibility_off_outlined,
-                                      color: AppColors.kLightBlue,
-                                    ),
-                                    onPressed: () {
-                                      isConfirmPassword = !isConfirmPassword;
-                                      setState(() {});
-                                    },
-                                  ),
-                                ),
-                                heightSpace(30),
-                                MyCustomButton(
+                                )
+                              : MyCustomButton(
                                   onPressed: () {
                                     if (formKey.currentState!.validate()) {
                                       context
@@ -228,17 +227,17 @@ class _SignupViewState extends State<SignupView> {
                                   },
                                   text: "Sign Up",
                                 ),
-                                heightSpace(18),
-                                const LoginWithSocialMedia(),
-                                heightSpace(50),
-                                const HaveAccountOrNot(isLogin: false),
-                                heightSpace(50),
-                              ],
-                            ),
-                          ),
-                        ),
+                          heightSpace(18),
+                          const LoginWithSocialMedia(),
+                          heightSpace(50),
+                          const HaveAccountOrNot(isLogin: false),
+                          heightSpace(50),
+                        ],
                       ),
-                    );
+                    ),
+                  ),
+                ),
+              );
             },
           ),
         ],

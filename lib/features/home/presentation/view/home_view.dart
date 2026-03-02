@@ -9,6 +9,7 @@ import 'package:e_learning_app/features/home/presentation/widgets/courses_grid_v
 import 'package:e_learning_app/features/home/presentation/widgets/top_header_with_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -24,6 +25,7 @@ class HomeView extends StatelessWidget {
           }
         },
         builder: (context, state) {
+          final String? userId = Supabase.instance.client.auth.currentUser?.id;
           return Scaffold(
             body: RefreshIndicator(
               onRefresh: () => context.read<HomeCubit>().fetchCourses(),
@@ -32,7 +34,7 @@ class HomeView extends StatelessWidget {
               elevation: 0.0,
               child: Column(
                 children: [
-                  const TopHeaderWithSearch(userName: "Mohammed Waleed"),
+                  TopHeaderWithSearch(userName: userId ?? "User"),
                   state is GetCoursesLoadingState
                       ? customLoading()
                       : state is GetCoursesSuccessState &&
