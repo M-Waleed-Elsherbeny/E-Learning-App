@@ -99,6 +99,7 @@ class _SignupViewState extends State<SignupView> {
                                 ),
                                 heightSpace(8),
                                 CustomTextField(
+                                  controller: nameController,
                                   labelText: "Enter your name",
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {

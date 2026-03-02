@@ -1,12 +1,18 @@
+import 'package:e_learning_app/core/helper/custom_loading.dart';
+import 'package:e_learning_app/core/helper/custom_snack_bar.dart';
 import 'package:e_learning_app/core/helper/spacer.dart';
 import 'package:e_learning_app/core/style/colors/app_colors.dart';
 import 'package:e_learning_app/core/style/fonts/app_text_style.dart';
 import 'package:e_learning_app/core/widgets/custom_back_button.dart';
 import 'package:e_learning_app/core/widgets/custom_text.dart';
 import 'package:e_learning_app/core/widgets/my_custom_button.dart';
+import 'package:e_learning_app/features/course_details/data/cubit/enroll_course_cubit.dart';
+import 'package:e_learning_app/features/course_details/data/cubit/enroll_course_state.dart';
 import 'package:e_learning_app/features/home/data/models/course_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class CourseDetailsView extends StatelessWidget {
   const CourseDetailsView({super.key, required this.courseModel});
@@ -52,7 +58,7 @@ class CourseDetailsView extends StatelessWidget {
               ),
               heightSpace(20),
               const CustomText(title: "Description"),
-              heightSpace(20),
+              heightSpace(5),
               CustomText(
                 title: courseModel.desc,
                 style: AppTextStyle.font14BlackW600.copyWith(
@@ -60,6 +66,7 @@ class CourseDetailsView extends StatelessWidget {
                 ),
                 maxLines: 100,
               ),
+              heightSpace(100),
             ],
           ),
         ),
@@ -76,7 +83,42 @@ class CourseDetailsView extends StatelessWidget {
           ],
         ),
         margin: EdgeInsets.all(10.w),
-        child: MyCustomButton(text: "Enroll Course", onPressed: () {}),
+        child: BlocConsumer<EnrollCourseCubit, EnrollCourseState>(
+          listener: (context, state) {
+            if (state is EnrollCourseSuccessState) {
+              customSnackBar(
+                context,
+                "Course enrolled successfully",
+                backgroundColor: Colors.green,
+              );
+            }
+            if (state is EnrollCourseErrorState) {
+              customSnackBar(context, state.errorMessage);
+            }
+          },
+
+          builder: (context, state) {
+            return MyCustomButton(
+              child: state is EnrollCourseLoadingState
+                  ? customLoading()
+                  : CustomText(
+                      title: "Enroll Course",
+                      style: AppTextStyle.font24WhiteW600,
+                    ),
+              onPressed: () {
+                final userId = Supabase.instance.client.auth.currentUser?.id;
+                if (userId == null) {
+                  customSnackBar(context, "User not authenticated");
+                  return;
+                }
+                context.read<EnrollCourseCubit>().enrollInCourse(
+                  courseModel.id,
+                  Supabase.instance.client.auth.currentUser!.id,
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

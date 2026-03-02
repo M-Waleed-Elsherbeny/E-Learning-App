@@ -15,19 +15,22 @@ class CoursesGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double deviceWidth = MediaQuery.sizeOf(context).width;
+    double deviceHeight = MediaQuery.sizeOf(context).height;
     return Expanded(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.w),
         child: GridView.builder(
           itemCount: itemCount,
           shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 10,
             crossAxisSpacing: 8,
-            childAspectRatio: 0.6,
+            childAspectRatio: deviceWidth / (deviceHeight * 0.7),
           ),
           itemBuilder: (context, index) {
+            
             final CourseModel course = courses[index];
             return CoursesCardDetails(
               title: course.title,

@@ -11,7 +11,8 @@ class CoursesCardDetails extends StatelessWidget {
     super.key,
     required this.title,
     required this.price,
-    required this.imageUrl, this.onPressed,
+    required this.imageUrl,
+    this.onPressed,
   });
   final String title, price, imageUrl;
   final VoidCallback? onPressed;
@@ -57,6 +58,7 @@ class CoursesCardDetails extends StatelessWidget {
                   style: AppTextStyle.font16greyW400.copyWith(fontSize: 14.sp),
                 ),
                 heightSpace(10),
+                
                 MyCustomButton(
                   text: "Show Details",
                   onPressed: onPressed,
