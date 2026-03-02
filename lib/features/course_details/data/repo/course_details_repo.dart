@@ -15,4 +15,21 @@ class CourseDetailsRepo {
       return Left(e.toString());
     }
   }
+
+  Future<Either<String, bool>> checkEnrollment({
+    required courseId,
+    required userId,
+  }) async {
+    try {
+      final res = await supabase
+          .from("enrollments")
+          .select()
+          .eq("course_id", courseId)
+          .eq("user_id", userId)
+          .maybeSingle();
+      return right(res != null);
+    } catch (e) {
+      return left(e.toString());
+    }
+  }
 }

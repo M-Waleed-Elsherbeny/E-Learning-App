@@ -29,12 +29,10 @@ class MyApp extends StatelessWidget {
       designSize: Size(deviceWidth, deviceHeight),
       minTextAdapt: true,
       splitScreenMode: true,
-      // Use builder only if you need to use library outside ScreenUtilInit context
       builder: (_, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'E-Learning App',
-          // You can use the library anywhere in the app even in theme
           theme: ThemeData(
             splashColor: Colors.transparent,
             scaffoldBackgroundColor: AppColors.kScaffoldBackgroundColor,

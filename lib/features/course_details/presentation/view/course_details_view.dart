@@ -1,4 +1,3 @@
-import 'package:e_learning_app/core/helper/custom_loading.dart';
 import 'package:e_learning_app/core/helper/custom_snack_bar.dart';
 import 'package:e_learning_app/core/helper/spacer.dart';
 import 'package:e_learning_app/core/style/colors/app_colors.dart';
@@ -15,8 +14,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class CourseDetailsView extends StatelessWidget {
-  const CourseDetailsView({super.key, required this.courseModel});
+  const CourseDetailsView({
+    super.key,
+    required this.courseModel,
+    required this.userId,
+  });
   final CourseModel courseModel;
+  final String? userId;
 
   @override
   Widget build(BuildContext context) {
@@ -98,25 +102,35 @@ class CourseDetailsView extends StatelessWidget {
           },
 
           builder: (context, state) {
-            return MyCustomButton(
-              child: state is EnrollCourseLoadingState
-                  ? customLoading()
-                  : CustomText(
+            return state is EnrollCourseLoadingState
+                ? const CircularProgressIndicator(
+                    color: AppColors.kPrimaryColorBlue,
+                  )
+                : state is EnrollCourseSuccessState ||
+                      state is UserEnrolledState
+                ? MyCustomButton(
+                    child: CustomText(
+                      title: "Go To Course",
+                      style: AppTextStyle.font24WhiteW600,
+                    ),
+                    onPressed: () {},
+                  )
+                : MyCustomButton(
+                    child: CustomText(
                       title: "Enroll Course",
                       style: AppTextStyle.font24WhiteW600,
                     ),
-              onPressed: () {
-                final userId = Supabase.instance.client.auth.currentUser?.id;
-                if (userId == null) {
-                  customSnackBar(context, "User not authenticated");
-                  return;
-                }
-                context.read<EnrollCourseCubit>().enrollInCourse(
-                  courseModel.id,
-                  Supabase.instance.client.auth.currentUser!.id,
-                );
-              },
-            );
+                    onPressed: () {
+                      if (userId == null) {
+                        customSnackBar(context, "User not authenticated");
+                        return;
+                      }
+                      context.read<EnrollCourseCubit>().enrollInCourse(
+                        courseModel.id,
+                        Supabase.instance.client.auth.currentUser!.id,
+                      );
+                    },
+                  );
           },
         ),
       ),
