@@ -8,14 +8,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   await SupabaseServices.init();
+  userId = Supabase.instance.client.auth.currentUser!.id;
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
+
+late String? userId;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -44,7 +48,9 @@ class MyApp extends StatelessWidget {
               backgroundColor: AppColors.kScaffoldBackgroundColor,
             ),
           ),
-          initialRoute: AppRoutePath.loginScreen,
+          initialRoute: userId == null
+              ? AppRoutePath.loginScreen
+              : AppRoutePath.layoutBottomNavigationBar,
           onGenerateRoute: AppRouteConfig().onGenerateRoute,
         );
       },
