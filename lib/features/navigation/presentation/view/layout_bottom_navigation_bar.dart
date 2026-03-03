@@ -43,19 +43,19 @@ class LayoutBottomNavigationBar extends StatelessWidget {
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   icon: index == 0
-                      ? const Icon(Icons.home_filled)
+                      ? const Icon(Icons.home_filled, size: 30)
                       : const Icon(Icons.home_outlined),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
                   icon: index == 1
-                      ? const Icon(Icons.school)
+                      ? const Icon(Icons.school, size: 30)
                       : const Icon(Icons.school_outlined),
-                  label: 'Courses',
+                  label: 'My Courses',
                 ),
                 BottomNavigationBarItem(
                   icon: index == 2
-                      ? const Icon(Icons.person_2_rounded)
+                      ? const Icon(Icons.person_2_rounded, size: 30)
                       : const Icon(Icons.person_2_outlined),
                   label: 'Profile',
                 ),
