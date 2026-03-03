@@ -7,7 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyCoursesCard extends StatelessWidget {
-  const MyCoursesCard({super.key, required this.imageUrl, required this.courseTitle, required this.instructorName});
+  const MyCoursesCard({
+    super.key,
+    required this.imageUrl,
+    required this.courseTitle,
+    required this.instructorName,
+  });
   final String imageUrl, courseTitle, instructorName;
 
   @override
@@ -20,6 +25,7 @@ class MyCoursesCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
       margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
       child: Container(
+        padding: EdgeInsets.only(right: 10.w),
         width: double.infinity,
         height: 150.h,
         decoration: BoxDecoration(
@@ -30,34 +36,36 @@ class MyCoursesCard extends StatelessWidget {
           children: [
             Image.network(
               imageUrl,
-              width: 150.w,
+              width: 120.w,
               height: double.infinity,
               fit: BoxFit.fill,
               filterQuality: FilterQuality.high,
             ),
-            widthSpace(20),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomText(
-                  title: courseTitle,
-                  style: AppTextStyle.font14BlackW600,
-                ),
-                heightSpace(10),
-                CustomText(
-                  title: instructorName,
-                  style: AppTextStyle.font14BlackW600,
-                ),
-                heightSpace(20),
-                MyCustomButton(
-                  onPressed: () {
-                    // Navigate to course details
-                  },
-                  text: "Complete Course",
-                  style: AppTextStyle.font12WhiteBold,
-                  width: 80.w,
-                ),
-              ],
+            widthSpace(10),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomText(
+                    title: courseTitle,
+                    style: AppTextStyle.font14BlackW600,
+                  ),
+                  heightSpace(10),
+                  CustomText(
+                    title: instructorName,
+                    style: AppTextStyle.font14BlackW600,
+                  ),
+                  heightSpace(20),
+                  MyCustomButton(
+                    onPressed: () {
+                      // Navigate to course details
+                    },
+                    text: "View Course",
+                    style: AppTextStyle.font12WhiteBold,
+                    width: 80.w,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
