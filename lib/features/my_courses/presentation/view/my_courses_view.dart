@@ -35,6 +35,7 @@ class MyCoursesView extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final courses = state.courses[index];
                       return MyCoursesCard(
+                        courseModel: courses,
                         imageUrl: courses.image,
                         courseTitle: courses.title,
                         instructorName: courses.price.toString(),

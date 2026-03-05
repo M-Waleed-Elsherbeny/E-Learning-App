@@ -14,12 +14,14 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   await SupabaseServices.init();
-  userId = Supabase.instance.client.auth.currentUser!.id;
+  userId = Supabase.instance.client.auth.currentUser?.id;
+  log("userId: $userId");
+  log(userId!.isEmpty.toString());
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
 
-late String? userId;
+String? userId;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -48,7 +50,7 @@ class MyApp extends StatelessWidget {
               backgroundColor: AppColors.kScaffoldBackgroundColor,
             ),
           ),
-          initialRoute: userId == null
+          initialRoute: userId == null || userId!.isEmpty
               ? AppRoutePath.loginScreen
               : AppRoutePath.layoutBottomNavigationBar,
           onGenerateRoute: AppRouteConfig().onGenerateRoute,

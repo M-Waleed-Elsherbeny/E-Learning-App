@@ -44,6 +44,8 @@ dependencies:
   flutter_screenutil: ^5.9.3
   lottie: ^3.3.2
   supabase_flutter: ^2.12.0
+  video_player: ^2.11.0
+  flick_video_player: ^0.9.0
 
 dev_dependencies:
   flutter_test:

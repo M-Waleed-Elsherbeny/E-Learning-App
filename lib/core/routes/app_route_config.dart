@@ -8,6 +8,9 @@ import 'package:e_learning_app/features/course_details/data/cubit/enroll_course_
 import 'package:e_learning_app/features/course_details/data/repo/course_details_repo.dart';
 import 'package:e_learning_app/features/course_details/presentation/view/course_details_view.dart';
 import 'package:e_learning_app/features/home/data/models/course_model.dart';
+import 'package:e_learning_app/features/my_courses_videos/data/cubit/course_videos_cubit.dart';
+import 'package:e_learning_app/features/my_courses_videos/data/repo/course_videos_repo.dart';
+import 'package:e_learning_app/features/my_courses_videos/presentation/view/my_courses_videos.dart';
 import 'package:e_learning_app/features/navigation/data/cubit/navigation_cubit.dart';
 import 'package:e_learning_app/features/navigation/presentation/view/layout_bottom_navigation_bar.dart';
 import 'package:e_learning_app/main.dart';
@@ -54,6 +57,19 @@ class AppRouteConfig {
                 courseModel: courseModel,
                 userId: userId,
               ),
+            );
+          },
+        );
+
+      case AppRoutePath.myCoursesVideos:
+        return MaterialPageRoute(
+          builder: (_) {
+            final CourseModel courseModel = settings.arguments as CourseModel;
+            return BlocProvider(
+              create: (context) =>
+                  CourseVideosCubit(CourseVideosRepo())
+                    ..getCourseVideos(courseModel.id),
+              child: MyCoursesVideos(courseModel: courseModel),
             );
           },
         );
