@@ -12,7 +12,8 @@ class MyCustomButton extends StatelessWidget {
     this.color,
     this.style,
     this.width,
-    this.height, this.child,
+    this.height,
+    this.child,
   });
   final VoidCallback? onPressed;
   final String? text;
@@ -28,11 +29,13 @@ class MyCustomButton extends StatelessWidget {
       height: height ?? 52.h,
       color: color ?? AppColors.kPrimaryColorBlue,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
-      onPressed: onPressed,
-      child: child ?? CustomText(
-        title: text ?? "Type text here",
-        style: style ?? AppTextStyle.font18White600,
-      ),
+      onPressed: onPressed ?? () {},
+      child:
+          child ??
+          CustomText(
+            title: text ?? "Type text here",
+            style: style ?? AppTextStyle.font18White600,
+          ),
     );
   }
 }

@@ -10,9 +10,15 @@ import 'package:e_learning_app/features/home/presentation/widgets/top_header_wit
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  String userName = "";
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HomeCubit>(
@@ -21,6 +27,13 @@ class HomeView extends StatelessWidget {
         listener: (context, state) {
           if (state is GetCoursesErrorState) {
             customSnackBar(context, state.errorMessage);
+          }
+          if (state is GetUserNameErrorState) {
+            customSnackBar(context, state.errorMessage);
+          }
+          if (state is GetUserNameSuccessState) {
+            userName = state.userName;
+            setState(() {});
           }
         },
         builder: (context, state) {
@@ -32,7 +45,7 @@ class HomeView extends StatelessWidget {
               elevation: 0.0,
               child: Column(
                 children: [
-                  const TopHeaderWithSearch(userName: "User"),
+                  TopHeaderWithSearch(userName: userName),
                   state is GetCoursesLoadingState
                       ? customLoading()
                       : state is GetCoursesSuccessState &&

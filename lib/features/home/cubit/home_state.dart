@@ -15,3 +15,14 @@ class GetCoursesErrorState extends HomeState {
   final String errorMessage;
   GetCoursesErrorState({required this.errorMessage});
 }
+class GetUserNameLoadingState extends HomeState {}
+
+class GetUserNameSuccessState extends HomeState {
+  final String userName;
+  GetUserNameSuccessState({required this.userName});
+}
+
+class GetUserNameErrorState extends HomeState {
+  final String errorMessage;
+  GetUserNameErrorState({required this.errorMessage});
+}

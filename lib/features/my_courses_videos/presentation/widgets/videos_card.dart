@@ -1,11 +1,19 @@
+import 'package:e_learning_app/core/routes/app_route_path.dart';
 import 'package:e_learning_app/core/style/colors/app_colors.dart';
 import 'package:e_learning_app/core/style/fonts/app_text_style.dart';
+import 'package:e_learning_app/features/my_courses_videos/data/model/course_videos_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class VideosCard extends StatelessWidget {
-  const VideosCard({super.key, required this.title, required this.description});
+  const VideosCard({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.videosModel,
+  });
   final String title, description;
+  final CourseVideosModel videosModel;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +37,14 @@ class VideosCard extends StatelessWidget {
           color: AppColors.kPrimaryColorBlue,
           size: 20.r,
         ),
+        onTap: () {
+          Navigator.pushNamed(
+            context,
+            AppRoutePath.videoPlayerView,
+            arguments: videosModel,
+          );
+        },
       ),
     );
-    
   }
 }

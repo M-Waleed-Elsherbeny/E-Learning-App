@@ -8,6 +8,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> fetchCourses() async {
     try {
+      await getUserName();
       emit(GetCoursesLoadingState());
       final res = await homeRepo.getCourses();
       res.fold(
@@ -20,6 +21,23 @@ class HomeCubit extends Cubit<HomeState> {
       );
     } catch (e) {
       emit(GetCoursesErrorState(errorMessage: e.toString()));
+    }
+  }
+
+  Future<void> getUserName() async {
+    try {
+      emit(GetUserNameLoadingState());
+      final res = await homeRepo.getUserName();
+      res.fold(
+        (err) {
+          emit(GetUserNameErrorState(errorMessage: err));
+        },
+        (name) {
+          emit(GetUserNameSuccessState(userName: name));
+        },
+      );
+    } catch (e) {
+      emit(GetUserNameErrorState(errorMessage: e.toString()));
     }
   }
 }

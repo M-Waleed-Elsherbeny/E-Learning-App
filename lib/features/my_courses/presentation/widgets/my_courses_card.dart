@@ -13,7 +13,8 @@ class MyCoursesCard extends StatelessWidget {
     super.key,
     required this.imageUrl,
     required this.courseTitle,
-    required this.instructorName, required this.courseModel,
+    required this.instructorName,
+    required this.courseModel,
   });
   final String imageUrl, courseTitle, instructorName;
   final CourseModel courseModel;
@@ -46,7 +47,7 @@ class MyCoursesCard extends StatelessWidget {
               fit: BoxFit.fill,
               filterQuality: FilterQuality.high,
             ),
-            widthSpace(25),
+            widthSpace(15),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -62,7 +63,11 @@ class MyCoursesCard extends StatelessWidget {
                 heightSpace(20),
                 MyCustomButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, AppRoutePath.myCoursesVideos, arguments: courseModel);
+                    Navigator.pushNamed(
+                      context,
+                      AppRoutePath.myCoursesVideos,
+                      arguments: courseModel,
+                    );
                   },
                   text: "View Course",
                   style: AppTextStyle.font12WhiteBold,
