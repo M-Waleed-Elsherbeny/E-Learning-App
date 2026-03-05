@@ -5,4 +5,5 @@ class AppRoutePath {
   static const String layoutBottomNavigationBar = '/layoutBottomNavigationBar';
   static const String courseDetails = '/courseDetails';
   static const String myCoursesVideos = '/myCoursesVideos';
+  static const String videoPlayerView = '/videoPlayerView';
 }

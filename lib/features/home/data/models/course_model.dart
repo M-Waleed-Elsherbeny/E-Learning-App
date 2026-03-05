@@ -16,7 +16,6 @@ class CourseModel {
       title: json['title'] ?? "",
       desc: json['desc'] ?? "",
       image: json['image'] ?? "",
-
       price: json['price'].toDouble(),
     );
   }

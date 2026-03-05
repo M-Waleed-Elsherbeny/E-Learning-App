@@ -31,17 +31,17 @@ class MyCoursesView extends StatelessWidget {
                 ? customLoading()
                 : state is GetMyCoursesSuccess && state.courses.isNotEmpty
                 ? ListView.builder(
-                    itemCount: state.courses.length,
-                    itemBuilder: (context, index) {
-                      final courses = state.courses[index];
-                      return MyCoursesCard(
-                        courseModel: courses,
-                        imageUrl: courses.image,
-                        courseTitle: courses.title,
-                        instructorName: courses.price.toString(),
-                      );
-                    },
-                  )
+                  itemCount: state.courses.length,
+                  itemBuilder: (context, index) {
+                    final courses = state.courses[index];
+                    return MyCoursesCard(
+                      courseModel: courses,
+                      imageUrl: courses.image,
+                      courseTitle: courses.title,
+                      instructorName: courses.price.toString(),
+                    );
+                  },
+                )
                 : const Center(
                     child: CustomText(
                       title: "You Have not Enrolled in any courses",

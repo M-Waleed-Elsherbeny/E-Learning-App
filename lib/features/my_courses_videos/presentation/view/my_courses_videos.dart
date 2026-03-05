@@ -6,6 +6,7 @@ import 'package:e_learning_app/core/widgets/custom_back_button.dart';
 import 'package:e_learning_app/features/home/data/models/course_model.dart';
 import 'package:e_learning_app/features/my_courses_videos/data/cubit/course_videos_cubit.dart';
 import 'package:e_learning_app/features/my_courses_videos/data/cubit/course_videos_state.dart';
+import 'package:e_learning_app/features/my_courses_videos/data/model/course_videos_model.dart';
 import 'package:e_learning_app/features/my_courses_videos/presentation/widgets/videos_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,9 +44,11 @@ class MyCoursesVideos extends StatelessWidget {
                 : state is CourseVideosSuccess && state.videos.isNotEmpty
                 ? ListView.builder(
                     itemBuilder: (context, index) {
+                      final CourseVideosModel videosModel = state.videos[index];
                       return VideosCard(
-                        title: state.videos[index].title,
-                        description: state.videos[index].desc,
+                        videosModel: videosModel,
+                        title: videosModel.title,
+                        description: videosModel.desc,
                       );
                     },
                     itemCount: state.videos.length,
