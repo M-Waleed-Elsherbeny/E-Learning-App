@@ -1,5 +1,6 @@
 import 'package:e_learning_app/core/helper/custom_snack_bar.dart';
 import 'package:e_learning_app/core/helper/spacer.dart';
+import 'package:e_learning_app/core/routes/app_route_path.dart';
 import 'package:e_learning_app/core/style/colors/app_colors.dart';
 import 'package:e_learning_app/core/style/fonts/app_text_style.dart';
 import 'package:e_learning_app/core/widgets/custom_back_button.dart';
@@ -113,7 +114,13 @@ class CourseDetailsView extends StatelessWidget {
                       title: "Go To Course",
                       style: AppTextStyle.font24WhiteW600,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutePath.myCoursesVideos,
+                        arguments: courseModel,
+                      );
+                    },
                   )
                 : MyCustomButton(
                     child: CustomText(
